@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poengtelling</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        * {
+            font-family: sans-serif;
+            font-size: 400px
+        }
+        #score {
+            color: white;
+            height: 98vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;   /* The same as your div height */
+        }
+    </style>
+</head>
+<body>
+    <div id="score">0</div>
+</body>
+<script>
+
+score = 0;
+span = document.getElementById("score");
+
+var ding = new Audio('ding.mp3');
+var brr = new Audio('brr.mp3');
+var yay = new Audio('yay.mp3');
+
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    
+    if (evt.keyCode == 38) {
+        score++;
+        span.innerHTML = score;
+        if(score < 5) {
+            // play ding sound
+            ding.pause();
+            ding.currentTime = 0;
+            ding.play();
+        } else {
+            span.style.color = "yellow";
+            // play victory sound
+            yay.pause();
+            yay.currentTime = 0;
+            yay.play();
+        }
+    }
+    if (evt.keyCode == 40) {
+        score--;
+        span.innerHTML = score;
+        // play brr sound
+        brr.pause();
+        brr.currentTime = 0;
+        brr.play();
+        if(score < 5) {
+            span.style.color = "white";
+        }
+    }
+    
+};
+
+</script>
+</html>
